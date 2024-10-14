@@ -1,6 +1,8 @@
+
 //applicationcontroller.js
 const Application = require("../models/Application"); // Assuming Application model exists
 
+//application by userEmail
 exports.getApplicationsByUserEmail = async (req, res) => {
   const email = req.user.email; // Assuming user is set in the request
 
@@ -12,6 +14,7 @@ exports.getApplicationsByUserEmail = async (req, res) => {
   }
 };
 
+// post job for company
 exports.getPostedJobsForCompany = async (req, res) => {
   const companyId = req.user.id; // Assuming user is set in the request
 
@@ -23,6 +26,7 @@ exports.getPostedJobsForCompany = async (req, res) => {
   }
 };
 
+// apply for job by candidate
 exports.getAppliedJobsForCandidate = async (req, res) => {
   const candidateId = req.user.id; // Assuming user is set in the request
 
@@ -34,6 +38,7 @@ exports.getAppliedJobsForCandidate = async (req, res) => {
   }
 };
 
+// for chat
 exports.getMessagesBetweenCompanyAndCandidate = async (req, res) => {
   const { applicationId } = req.params;
 
@@ -48,16 +53,4 @@ exports.getMessagesBetweenCompanyAndCandidate = async (req, res) => {
   }
 };
 
-exports.updateProfile = async (req, res) => {
-  const { userId } = req.params; // Assuming userId is passed
-  const updateData = req.body;
 
-  try {
-    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
-      new: true,
-    });
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};

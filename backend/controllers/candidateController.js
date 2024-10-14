@@ -1,17 +1,17 @@
-//candidateController.js
-const Candidate = require("../models/Candidate"); // Candidate model
-const Application = require("../models/Application"); // Application model, assuming it exists
-const JobPost = require("../models/JobPost"); // JobPost model, assuming it exists
 
-// Upload Resume
+//candidateController.js
+const Candidate = require("../models/Candidate");
+const Application = require("../models/Application");
+const JobPost = require("../models/JobPost");
+
+// Upload resume
 exports.uploadResume = async (req, res) => {
   const { candidateId } = req.params;
   const { resume } = req.body;
 
   try {
     const candidate = await Candidate.findById(candidateId);
-    if (!candidate)
-      return res.status(404).json({ message: "Candidate not found!" });
+    if (!candidate) return res.status(404).json({ message: "Candidate not found!" });
 
     candidate.resume = resume;
     await candidate.save();
@@ -21,25 +21,23 @@ exports.uploadResume = async (req, res) => {
   }
 };
 
-// Apply for a Job
+// Apply for a job
 exports.applyForJob = async (req, res) => {
   const { jobId } = req.params;
-  const candidateId = req.user.id; // Assuming req.user is populated by the auth middleware
+  const candidateId = req.user.id;
 
   try {
     const application = new Application({ jobId, candidateId });
     await application.save();
-    res
-      .status(201)
-      .json({ message: "Applied for job successfully!", application });
+    res.status(201).json({ message: "Applied for job successfully!", application });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Search Jobs
+// Search for jobs
 exports.searchJobs = async (req, res) => {
-  const { query } = req.query; // Search criteria
+  const { query } = req.query;
 
   try {
     const jobs = await JobPost.find({
@@ -55,57 +53,33 @@ exports.searchJobs = async (req, res) => {
   }
 };
 
-// Reply to a Company Message
+// Reply to employer message
 exports.replyToCompanyMessage = async (req, res) => {
   const { applicationId, reply } = req.body;
 
   try {
     const application = await Application.findById(applicationId);
-    if (!application)
-      return res.status(404).json({ message: "Application not found!" });
+    if (!application) return res.status(404).json({ message: "Application not found!" });
 
-    application.messages.push({ from: "candidate", message: reply });
+    application.messages.push({ sender: "candidate", content: reply });
     await application.save();
-    res.status(200).json({ message: "Reply sent to company!" });
+    res.status(200).json({ message: "Reply sent to employer!" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-// Update Job Application Stage
-exports.updateJobApplicationStage = async (req, res) => {
-  const { applicationId, stage } = req.body; // e.g., 'shortlisted', 'screening'
 
-  try {
-    const application = await Application.findById(applicationId);
-    if (!application)
-      return res.status(404).json({ message: "Application not found!" });
-
-    application.stage = stage; // Update application stage
-    await application.save();
-    res
-      .status(200)
-      .json({ message: "Application stage updated successfully!" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
-// Update Candidate Profile
-exports.updateProfile = async (req, res) => {
+// update candidate profile
+exports.updateCandidateProfile = async (req, res) => {
   const { candidateId } = req.params;
-  const updates = req.body;
+  const updateData = req.body;
 
   try {
-    const candidate = await Candidate.findByIdAndUpdate(candidateId, updates, {
+    const updatedCandidate = await Candidate.findByIdAndUpdate(candidateId, updateData, {
       new: true,
     });
-    if (!candidate)
-      return res.status(404).json({ message: "Candidate not found!" });
-
-    res
-      .status(200)
-      .json({ message: "Profile updated successfully!", candidate });
+    res.status(200).json({ message: "Candidate profile updated!", updatedCandidate });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

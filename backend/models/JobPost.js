@@ -1,3 +1,4 @@
+
 //JobPost.js
 const mongoose = require('mongoose');
 

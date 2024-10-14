@@ -1,3 +1,4 @@
+
 //Employer.js
 const mongoose = require('mongoose');
 
@@ -27,7 +28,7 @@ const employerSchema = new mongoose.Schema({
     type: String,
     enum: [
       'Accounting', 'Airline/Aviation', 'Animation', 'Medicine', 'Art and Craft',
-      'Automotive', 'Banking', 'Biotechnologies', 'Civil Engineering', 'Computer'
+      'Automotive', 'Banking', 'Biotechnologies', 'Civil Engineering', 'Computer','others'
       // Add more as needed
     ],
     required: true,

@@ -1,3 +1,4 @@
+
 //applicationRoutes.js
 const express = require("express");
 const {
@@ -20,6 +21,5 @@ router.get(
   "/applications/:applicationId/messages",
   getMessagesBetweenCompanyAndCandidate
 ); // Get messages for specific application
-router.put("/profile/:userId", updateProfile); // Update user profile
 
 module.exports = router;

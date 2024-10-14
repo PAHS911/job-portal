@@ -1,5 +1,5 @@
-//authcontroller.js
 
+//authcontroller.js
 const User = require("../models/User"); // Assuming User model handles both employers and candidates
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
