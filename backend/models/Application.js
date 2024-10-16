@@ -11,7 +11,7 @@ const messageSchema = new mongoose.Schema({
 const applicationSchema = new mongoose.Schema({
   candidateId: { type: mongoose.Schema.Types.ObjectId, ref: "Candidate", required: true },
   jobId: { type: mongoose.Schema.Types.ObjectId, ref: "JobPost", required: true },
-  stage: { type: String, enum: ["shortlisted", "screening", "interview", "hired"], default: "shortlisted" },
+  stage: { type: String, enum: ["apply","applied","shortlisted", "screening", "interview", "hired", "rejected"], default: "apply" },
   messages: [messageSchema] // Messages between candidate and employer
 }, { timestamps: true });
 

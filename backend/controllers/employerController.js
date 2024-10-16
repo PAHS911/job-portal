@@ -88,6 +88,8 @@ exports.messageCandidate = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+// update employer profile
 exports.updateEmployerProfile = async (req, res) => {
   const { employerId } = req.params;
   const updateData = req.body;

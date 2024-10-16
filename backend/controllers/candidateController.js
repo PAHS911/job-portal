@@ -84,3 +84,28 @@ exports.updateCandidateProfile = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+
+  // update job stages
+exports.jobStages = async (req, res) => {
+  const { applicationId } = req.params; // Get applicationId from request params
+  const { stage } = req.body; // Get the new stage from the request body
+
+  try {
+    // Find the application and update its stage
+    const updatedApplication = await Application.findByIdAndUpdate(
+      applicationId,
+      { stage }, // Update with the new stage
+      { new: true, runValidators: true } // Options: return the updated document and run validators
+    );
+
+    if (!updatedApplication) {
+      return res.status(404).json({ message: "Application not found!" });
+    }
+
+    res.status(200).json({ message: "Job application stage updated successfully!", updatedApplication });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};

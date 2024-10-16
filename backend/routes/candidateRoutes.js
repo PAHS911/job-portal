@@ -6,7 +6,7 @@ const {
   applyForJob,
   searchJobs,
   replyToCompanyMessage,
-  updateJobApplicationStage,
+  jobStages,
   updateCandidateProfile,
 } = require("../controllers/candidateController");
 
@@ -19,11 +19,8 @@ router.post("/:candidateId/upload-resume", authenticate, uploadResume);
 router.post("/:jobId/apply", authenticate, applyForJob);
 router.get("/search-jobs", authenticate, searchJobs);
 router.post("/reply-to-message", authenticate, replyToCompanyMessage);
-router.put(
-  "/update-application-stage",
-  authenticate,
-  updateJobApplicationStage
-);
+router.put('/applications/:applicationId/stage', authenticate, jobStages);
+
 router.put("/:candidateId/profile", authenticate, updateCandidateProfile);
 
 module.exports = router;
