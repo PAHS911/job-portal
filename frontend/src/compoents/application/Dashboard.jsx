@@ -1,8 +1,14 @@
 
+import Employer from "../employer/Employer";
+import Candidate from "../candidate/Candidate";
+
 const Dashboard = () => {
   return (
-    <div>Dashboard</div>
-  )
-}
+    <>
+      <Candidate />
+      <Employer />
+    </>
+  );
+};
 
-export default Dashboard
+export default Dashboard;

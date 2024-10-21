@@ -29,7 +29,7 @@ const employerSchema = new mongoose.Schema({
     enum: [
       'Accounting', 'Airline/Aviation', 'Animation', 'Medicine', 'Art and Craft',
       'Automotive', 'Banking', 'Biotechnologies', 'Civil Engineering', 'Computer','others'
-      // Add more as needed
+     
     ],
     required: true,
   },

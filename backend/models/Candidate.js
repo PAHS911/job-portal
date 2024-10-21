@@ -14,7 +14,7 @@ const candidateSchema = new mongoose.Schema({
   fatherName: String,
   gender: {
     type: String,
-    enum: ['Male', 'Female', 'Other'],
+    enum: ['Male', 'Female'],
     required: true,
   },
   dob: Date,
@@ -29,7 +29,7 @@ const candidateSchema = new mongoose.Schema({
   address: String,
   country: String,
   city: String,
-  resume: String, // Path to resume file
+  resume: String, 
   industry: {
     type: String,
     enum: [
@@ -48,8 +48,8 @@ const candidateSchema = new mongoose.Schema({
     linkedin: String,
     twitter: String
   },
-  education: [String], // You could expand this based on needs
-  workExperience: [String], // Could also expand to details
+  education: [String], 
+  workExperience: [String],
   projects: [String],
   languages: [String],
   skills: [String],

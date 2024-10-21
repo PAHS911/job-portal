@@ -5,4 +5,4 @@ const AboutCandidate = () => {
   )
 }
 
-export default AboutCandidate
+export default AboutCandidate 

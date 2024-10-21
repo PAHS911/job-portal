@@ -17,8 +17,8 @@ const jobPostSchema = new mongoose.Schema({
   jobShift: String,
   totalVacancies: Number,
   lastDate: Date,
-  jobDescription: String, // Responsibilities
-  jobSpecification: String, // Preferred Skills
+  jobDescription: String, 
+  jobSpecification: String, 
   jobRewardsBenefits: String
 });
 

@@ -12,7 +12,7 @@ const applicationSchema = new mongoose.Schema({
   candidateId: { type: mongoose.Schema.Types.ObjectId, ref: "Candidate", required: true },
   jobId: { type: mongoose.Schema.Types.ObjectId, ref: "JobPost", required: true },
   stage: { type: String, enum: ["apply","applied","shortlisted", "screening", "interview", "hired", "rejected"], default: "apply" },
-  messages: [messageSchema] // Messages between candidate and employer
+  messages: [messageSchema] 
 }, { timestamps: true });
 
 module.exports = mongoose.model("Application", applicationSchema);
