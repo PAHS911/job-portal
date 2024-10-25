@@ -1,5 +1,5 @@
-import  { useState } from "react";
-import { TextField, Button, Box, Typography } from "@mui/material";
+import { useState } from "react";
+import { TextField, Button, Box, Typography, Alert } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -8,21 +8,28 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const navigate = useNavigate(); // Hook to programmatically navigate
+  const [errorMessage, setErrorMessage] = useState(""); // State for error message
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrorMessage(""); // Clear error message when user changes input
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("/api/auth/login", formData);
-      const token = res.data.token;
-      alert("Login successful!");
-      localStorage.setItem("token", token); // Save the token in localStorage for authentication
-      navigate("/dashboard"); // Navigate to the dashboard after login
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        formData
+      );
+      const { token, userType } = res.data; // Assuming userType is returned
+
+      localStorage.setItem("token", token); // Save the token
+      localStorage.setItem("userType", userType); // Save the user type
+      navigate("/dashboard");
     } catch (error) {
+      setErrorMessage("Incorrect email or password"); // Set error message
       console.error("Error during login", error);
     }
   };
@@ -31,11 +38,23 @@ const Login = () => {
     <Box
       component="form"
       onSubmit={handleSubmit}
-      sx={{ display: "flex", flexDirection: "column", maxWidth: "400px", mx: "auto", mt: 4 }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        maxWidth: "400px",
+        mx: "auto",
+        mt: 4,
+      }}
     >
       <Typography variant="h4" gutterBottom>
         Login
       </Typography>
+      {errorMessage && (
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {errorMessage}
+        </Alert>
+      )}{" "}
+      {/* Error message display */}
       <TextField
         label="Email"
         name="email"
@@ -59,11 +78,7 @@ const Login = () => {
       <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
         Login
       </Button>
-      <Button
-        variant="text"
-        onClick={() => navigate("/signup")}
-        sx={{ mt: 2 }}
-      >
+      <Button variant="text" onClick={() => navigate("/signup")} sx={{ mt: 2 }}>
         Create New Account
       </Button>
     </Box>

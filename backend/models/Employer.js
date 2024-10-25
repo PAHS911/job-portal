@@ -1,6 +1,5 @@
-
 //Employer.js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const employerSchema = new mongoose.Schema({
   companyName: {
@@ -10,26 +9,34 @@ const employerSchema = new mongoose.Schema({
   businessEntity: {
     type: String,
     enum: [
-      'Sole Proprietorship', 
-      'Partnership', 
-      'SME (Pvt. Ltd.)', 
-      'Private Limited Company (Pvt. Ltd.)', 
-      'Public Limited Company (Listed)', 
-      'Public Limited Company (Unlisted)', 
-      'Nonprofits', 
-      'Joint Venture', 
-      'Inc (Incorporated)', 
-      'LLC (Limited Liability Company)', 
-      'Government Organization'
+      "Sole Proprietorship",
+      "Partnership",
+      "SME (Pvt. Ltd.)",
+      "Private Limited Company (Pvt. Ltd.)",
+      "Public Limited Company (Listed)",
+      "Public Limited Company (Unlisted)",
+      "Nonprofits",
+      "Joint Venture",
+      "Inc (Incorporated)",
+      "LLC (Limited Liability Company)",
+      "Government Organization",
     ],
     required: true,
   },
   industry: {
     type: String,
     enum: [
-      'Accounting', 'Airline/Aviation', 'Animation', 'Medicine', 'Art and Craft',
-      'Automotive', 'Banking', 'Biotechnologies', 'Civil Engineering', 'Computer','others'
-     
+      "Accounting",
+      "Airline/Aviation",
+      "Animation",
+      "Medicine",
+      "Art and Craft",
+      "Automotive",
+      "Banking",
+      "Biotechnologies",
+      "Civil Engineering",
+      "Computer",
+      "others",
     ],
     required: true,
   },
@@ -57,7 +64,7 @@ const employerSchema = new mongoose.Schema({
   website: String,
   nationalTaxNumber: String,
   totalEmployees: Number,
-  establishedIn: Date
+  establishedIn: Date,
 });
 
-module.exports = mongoose.model('Employer', employerSchema);
+module.exports = mongoose.model("Employer", employerSchema);

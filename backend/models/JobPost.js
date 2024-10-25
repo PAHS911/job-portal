@@ -1,6 +1,5 @@
-
 //JobPost.js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const jobPostSchema = new mongoose.Schema({
   experienceRequired: String,
@@ -17,9 +16,22 @@ const jobPostSchema = new mongoose.Schema({
   jobShift: String,
   totalVacancies: Number,
   lastDate: Date,
-  jobDescription: String, 
-  jobSpecification: String, 
-  jobRewardsBenefits: String
+  jobDescription: String,
+  jobSpecification: String,
+  stage: {
+    type: String,
+    enum: [
+      "apply",
+      "applied",
+      "shortlisted",
+      "screening",
+      "interview",
+      "hired",
+      "rejected",
+    ],
+    default: "apply",
+  },
+  jobRewardsBenefits: String,
 });
 
-module.exports = mongoose.model('JobPost', jobPostSchema);
+module.exports = mongoose.model("JobPost", jobPostSchema);

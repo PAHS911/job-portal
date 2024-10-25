@@ -1,40 +1,65 @@
+// src/components/application/Dashboard.jsx
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Employer from "../employer/Employer";
 import Candidate from "../candidate/Candidate";
 import axios from "axios";
+import { Button, Box } from "@mui/material"; // Import MUI components
 
 const Dashboard = () => {
   const [candidate, setCandidate] = useState(null);
+  const [employer, setEmployer] = useState(null);
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  const userType = localStorage.getItem("userType"); // Get user type from localStorage
 
   useEffect(() => {
-    const fetchCandidate = async () => {
+    const fetchUserData = async () => {
       try {
-        const response = await axios.get("/api/candidate/profile"); // Adjust the endpoint as necessary
-        setCandidate(response.data);
+        if (userType === "candidate") { // Check if user is a candidate
+          const response = await axios.get("/api/candidate/profile");
+          setCandidate(response.data);
+        } else if (userType === "employer") { // Check if user is an employer
+          const response = await axios.get("/api/employer/profile");
+          setEmployer(response.data);
+        }
       } catch (error) {
-        console.error("Error fetching candidate data:", error);
+        console.error("Error fetching user data:", error);
       }
     };
 
-    fetchCandidate();
-  }, []);
+    fetchUserData();
+  }, [userType]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token"); // Clear the token from local storage
+    localStorage.removeItem("userType"); // Clear the user type from local storage
+    navigate("/login"); // Redirect to the login page
+  };
 
   return (
-    <>
-      {candidate ? (
-        <Candidate candidate={candidate} />
+    <Box sx={{ position: 'relative' }}>
+      <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
+        <Button variant="contained" color="error" onClick={handleLogout}>
+          Logout
+        </Button>
+      </Box>
+      {userType === "candidate" ? ( // Conditional rendering
+        candidate ? (
+          <Candidate candidate={candidate} />
+        ) : (
+          <div>Loading candidate data...</div>
+        )
+      ) : userType === "employer" ? (
+        employer ? (
+          <Employer employer={employer} />
+        ) : (
+          <div>Loading employer data...</div>
+        )
       ) : (
-        <div>Loading candidate data...</div>
+        <div>User type not recognized.</div>
       )}
-      <Employer />
-      {/* Add links or buttons to navigate to other employer functionalities */}
-      <div>
-        <a href="/post-job">Post Job</a>
-        <a href="/search-candidate">Search Candidates</a>
-        <a href="/about-company">About Company</a>
-        <a href="/message-candidate">Message Candidate</a>
-      </div>
-    </>
+    </Box>
   );
 };
 

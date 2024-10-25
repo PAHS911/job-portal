@@ -6,9 +6,17 @@ const employerRoutes = require("./routes/employerRoutes");
 const candidateRoutes = require("./routes/candidateRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
 const connectDB = require("./config/db");
+const cors = require("cors");
 const app = express();
 
 app.use(express.json()); // To parse JSON bodies
+
+// Use CORS middleware
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Allow requests from your frontend
+  })
+);
 
 // MongoDB connection
 connectDB();

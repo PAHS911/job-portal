@@ -1,11 +1,16 @@
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import Dashboard from "./compoents/application/Dashboard"; // Fixed path
-import Login from "./compoents/logsign/Login"; // Fixed path
-import Signup from "./compoents/logsign/Signup"; // Fixed path
-import AboutCompany from "./compoents/employer/AboutCompany"; // Add the new route
-import PostJob from "./compoents/employer/PostJob"; // Add the new route
-import MessageCandidate from "./compoents/employer/MessageCandidate"; // Add the new route
-import SearchCandidate from "./compoents/employer/SearchCandidate"; // Add the new route
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Navigate,
+} from "react-router-dom";
+import Dashboard from "./compoents/application/Dashboard";
+import Login from "./compoents/logsign/Login";
+import Signup from "./compoents/logsign/Signup";
+import AboutCompany from "./compoents/employer/AboutCompany";
+import PostJob from "./compoents/employer/PostJob";
+import MessageCandidate from "./compoents/employer/MessageCandidate";
+import SearchCandidate from "./compoents/employer/SearchCandidate";
 
 function App() {
   return (
