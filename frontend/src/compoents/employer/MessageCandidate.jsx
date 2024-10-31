@@ -7,7 +7,10 @@ const MessageCandidate = ({ applicationId }) => {
 
   const sendMessage = async () => {
     try {
-      await axios.post("/api/employer/jobs/message", { applicationId, message });
+      await axios.post("/api/employer/jobs/message", {
+        applicationId,
+        message,
+      });
       setSuccess("Message sent successfully!");
     } catch (error) {
       setSuccess("Error sending message");
@@ -22,7 +25,10 @@ const MessageCandidate = ({ applicationId }) => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <button className="mt-2 bg-blue-500 text-white px-4 py-2 rounded" onClick={sendMessage}>
+      <button
+        className="mt-2 bg-blue-500 text-white px-4 py-2 rounded"
+        onClick={sendMessage}
+      >
         Send Message
       </button>
       {success && <p>{success}</p>}

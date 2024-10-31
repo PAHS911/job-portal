@@ -25,7 +25,7 @@ const Signup = () => {
         "http://localhost:5000/api/auth/signup",
         formData
       ); // Ensure correct backend URL
-     
+
       navigate("/login"); // Redirect to the login page after successful signup
     } catch (error) {
       console.error("Error during signup", error);

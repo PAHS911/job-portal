@@ -1,16 +1,11 @@
-import React from "react";
-import AboutCandidate from "./AboutCandidate.jsx";
-import ApplyJob from "./ApplyJob.jsx";
-import ReplyEmployer from "./ReplyEmployer.jsx";
-import SearchJob from "./SearchJob.jsx";
+import SearchJob from "./SearchJob";
 
-const Candidate = ({ candidate }) => {
+const Candidate = () => {
   return (
     <>
-      <AboutCandidate candidate={candidate} />
-      <ApplyJob jobId={"someJobId"} /> {/* Pass actual jobId */}
-      <ReplyEmployer applicationId={"someApplicationId"} /> {/* Pass actual applicationId */}
-      <SearchJob />
+      <section id="search">
+       <SearchJob/>
+      </section>
     </>
   );
 };

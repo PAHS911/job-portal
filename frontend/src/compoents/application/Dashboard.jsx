@@ -1,5 +1,5 @@
 // src/components/application/Dashboard.jsx
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Employer from "../employer/Employer";
 import Candidate from "../candidate/Candidate";
@@ -16,10 +16,12 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        if (userType === "candidate") { // Check if user is a candidate
+        if (userType === "candidate") {
+          // Check if user is a candidate
           const response = await axios.get("/api/candidate/profile");
           setCandidate(response.data);
-        } else if (userType === "employer") { // Check if user is an employer
+        } else if (userType === "employer") {
+          // Check if user is an employer
           const response = await axios.get("/api/employer/profile");
           setEmployer(response.data);
         }
@@ -38,8 +40,8 @@ const Dashboard = () => {
   };
 
   return (
-    <Box sx={{ position: 'relative' }}>
-      <Box sx={{ position: 'absolute', top: 16, right: 16 }}>
+    <Box sx={{ position: "relative" }}>
+      <Box sx={{ position: "absolute", top: 16, right: 16 }}>
         <Button variant="contained" color="error" onClick={handleLogout}>
           Logout
         </Button>

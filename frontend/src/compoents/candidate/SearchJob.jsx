@@ -13,7 +13,9 @@ const SearchJob = () => {
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.get(`/api/candidate/search-jobs?query=${query}`);
+      const response = await axios.get(
+        `/api/candidate/search-jobs?query=${query}`
+      );
       setJobs(response.data);
     } catch (error) {
       console.error("Error searching for jobs:", error);
@@ -21,14 +23,28 @@ const SearchJob = () => {
   };
 
   return (
-    <Box component="form" onSubmit={handleSearchSubmit} sx={{ padding: 2, border: '1px solid #ccc', borderRadius: 2 }}>
+    <Box
+      component="form"
+      onSubmit={handleSearchSubmit}
+      sx={{ padding: 2, border: "1px solid #ccc", borderRadius: 2 }}
+    >
       <Typography variant="h5">Search for Jobs</Typography>
-      <TextField name="search" label="Search Jobs" onChange={handleSearchChange} fullWidth required />
-      <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>Search</Button>
+      <TextField
+        name="search"
+        label="Search Jobs"
+        onChange={handleSearchChange}
+        fullWidth
+        required
+      />
+      <Button type="submit" variant="contained" color="primary" sx={{ mt: 2 }}>
+        Search
+      </Button>
       <Box sx={{ mt: 2 }}>
         {jobs.length > 0 ? (
-          jobs.map(job => (
-            <Typography key={job._id}>{job.title} at {job.companyName}</Typography>
+          jobs.map((job) => (
+            <Typography key={job._id}>
+              {job.title} at {job.companyName}
+            </Typography>
           ))
         ) : (
           <Typography>No jobs found.</Typography>

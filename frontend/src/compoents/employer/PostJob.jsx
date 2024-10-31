@@ -48,7 +48,10 @@ const PostJob = () => {
         onChange={handleChange}
         className="border p-2 mb-2 w-full rounded"
       />
-      <button className="bg-blue-500 text-white px-4 py-2 rounded" type="submit">
+      <button
+        className="bg-blue-500 text-white px-4 py-2 rounded"
+        type="submit"
+      >
         Post Job
       </button>
     </form>
